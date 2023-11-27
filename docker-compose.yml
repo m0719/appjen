@@ -3,5 +3,5 @@ services:
   web:
     build: ./app
     ports:
-      - "5003:5000"
+      - "5004:5000"
 
