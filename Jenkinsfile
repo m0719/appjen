@@ -8,6 +8,32 @@ pipeline {
             }
         }
         
+        stage('Check Installations') {
+            steps {
+                script {
+                    bat 'docker --version'
+                    bat 'python --version'
+                    bat 'docker-compose --version'
+                }
+            }
+        }
+        
+        stage('Remove Old Containers') {
+            steps {
+                script {
+                    bat 'docker container prune -f' // Remove stopped containers forcefully
+                }
+            }
+        }
+        
+        stage('Remove Old Images') {
+            steps {
+                script {
+                    bat 'docker image prune -a -f' // Remove unused images forcefully
+                }
+            }
+        }
+        
         stage('Build and Test') {
             steps {
                 script {
