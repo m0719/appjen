@@ -8,6 +8,33 @@ pipeline {
             }
         }
         
+        stage('Check Installations') {
+            steps {
+                script {
+                    bat 'docker --version'
+                    bat 'docker-compose --version'
+                }
+            }
+        }
+        
+        stage('Check Old Images and Containers') {
+            steps {
+                script {
+                    bat 'docker images'
+                    bat 'docker ps -a'
+                }
+            }
+        }
+        
+        stage('Prune Old Images and Containers') {
+            steps {
+                script {
+                    bat 'docker container prune -f' // Remove stopped containers forcefully
+                    bat 'docker image prune -a -f' // Remove unused images forcefully
+                }
+            }
+        }
+        
         stage('Build and Test') {
             steps {
                 script {
@@ -18,3 +45,4 @@ pipeline {
         }
     }
 }
+
