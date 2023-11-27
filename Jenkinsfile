@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     // Assuming docker-compose.yml is in the root directory of the repository
-                    sh 'docker-compose up -d'  // Use -d for detached mode, if needed
+                    bat 'docker-compose up -d'  // Use -d for detached mode, if needed
                 }
             }
         }
