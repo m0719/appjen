@@ -35,6 +35,14 @@ pipeline {
             }
         }
         
+        stage('Remove All Containers') {
+            steps {
+                script {
+                    bat 'docker rm -f $(docker ps -aq)' // Remove all containers, stopped or running
+                }
+            }
+        }
+        
         stage('Build and Test') {
             steps {
                 script {
@@ -45,4 +53,3 @@ pipeline {
         }
     }
 }
-
