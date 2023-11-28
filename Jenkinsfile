@@ -7,7 +7,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/m0719/appjen.git'
             }
         }
-        
+
         stage('Build and Test') {
             steps {
                 script {
@@ -16,7 +16,17 @@ pipeline {
                 }
             }
         }
-        
+
+        stage('SonarQube Scan') {
+            steps {
+                withSonarQubeEnv('SonarQubeServer') {
+                    script {
+                        bat 'sonar-scanner' // Or use 'sh' for Linux-based systems
+                    }
+                }
+            }
+        }
+
         stage('Send Slack Notifications') {
             steps {
                 script {
@@ -31,4 +41,3 @@ pipeline {
         }
     }
 }
-
