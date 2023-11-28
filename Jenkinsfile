@@ -16,5 +16,19 @@ pipeline {
                 }
             }
         }
+        
+        stage('Send Slack Notification') {
+            steps {
+                script {
+                    slackSend(
+                        botUser: true,
+                        channel: '#general',
+                        message: 'Jobs committed',
+                        tokenCredentialId: 'slacknewtoken'
+                    )
+                }
+            }
+        }
     }
 }
+
