@@ -17,7 +17,7 @@ pipeline {
             }
         }
         
-        stage('Send Slack Notification') {
+        stage('Send Slack Notifications') {
             steps {
                 script {
                     slackSend(
